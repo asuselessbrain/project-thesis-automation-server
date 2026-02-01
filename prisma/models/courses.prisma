@@ -1,0 +1,21 @@
+model Courses {
+  id          String       @id @default(uuid())
+  courseCode  String       @unique
+  courseName  String
+  description String?
+  credits     Float
+  semester    SemesterType
+  status      CourseStatus @default(ACTIVE)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  projectTheses  ProjectThesis[]
+  courseTeachers CourseTeacher[]
+
+  @@map("courses")
+}
+
+enum CourseStatus {
+  ACTIVE
+  ARCHIVED
+}

@@ -1,0 +1,30 @@
+model User {
+  id              String     @id @default(uuid())
+  email           String     @unique
+  password        String
+  role            UserRole   @default(STUDENT)
+  userStatus      UserStatus @default(ACTIVE)
+  isEmailVerified Boolean    @default(false)
+  otp             String?
+  otpExpiry       DateTime?
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+
+  student  Student?
+  admins   Admin?
+  teachers Teacher?
+
+  @@map("users")
+}
+
+enum UserRole {
+  ADMIN
+  TEACHER
+  STUDENT
+}
+
+enum UserStatus {
+  ACTIVE
+  BLOCKED
+  DELETED
+}

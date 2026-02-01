@@ -1,0 +1,27 @@
+model Task {
+  id                      String                   @id @default(uuid())
+  title                   String
+  description             String
+  dueDate                 DateTime
+  status                  TaskStatus               @default(TODO)
+  ratting                 Int                      @default(0)
+  feedback                String?
+  progressPercentage      Int                      @default(0)
+  projectThesisId         String
+  projectThesis           ProjectThesis            @relation(fields: [projectThesisId], references: [id])
+  requirements            String[]
+  referenceMaterials      String[]
+  createdAt               DateTime                 @default(now())
+  updatedAt               DateTime                 @updatedAt
+  projectThesisUpdateLogs ProjectThesisUpdateLog[]
+
+  @@map("tasks")
+}
+
+enum TaskStatus {
+  TODO
+  IN_PROGRESS
+  REVIEW
+  DONE
+  FAILED
+}

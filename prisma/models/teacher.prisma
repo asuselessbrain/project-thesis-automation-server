@@ -1,0 +1,44 @@
+model Teacher {
+  id          String             @id @default(uuid())
+  email       String             @unique
+  name        String
+  phoneNumber String
+  address     String
+  photoUrl    String?
+  faculty     String
+  department  Department
+  designation TeacherDesignation @default(LECTURER)
+  isChairman  Boolean            @default(false)
+  joinedAt    DateTime
+  status      TeacherStatus      @default(ACTIVE)
+  isDeleted   Boolean            @default(false)
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+
+  user           User            @relation(fields: [email], references: [email])
+  projectTheses  ProjectThesis[]
+  courseTeachers CourseTeacher[]
+
+  @@map("teachers")
+}
+
+enum TeacherStatus {
+  ACTIVE
+  STUDY_LEAVE
+  RETIRED
+}
+
+enum TeacherDesignation {
+  LECTURER
+  ASSISTANT_PROFESSOR
+  ASSOCIATE_PROFESSOR
+  PROFESSOR
+}
+
+enum Department {
+  Computer_Science_And_Information_Technology
+  Computer_science_And_Communication_Engineering
+  Electrical_And_Electronic_Engineering
+  Physics_And_Mechanical_Engineering
+  Mathematics
+}

@@ -1,0 +1,13 @@
+model ProjectThesisUpdateLog {
+  id                 String        @id @default(uuid())
+  supervisorFeedback String?
+  projectThesisId    String
+  projectThesis      ProjectThesis @relation(fields: [projectThesisId], references: [id])
+  taskId             String
+  task               Task          @relation(fields: [taskId], references: [id])
+  liveLink           String?
+  fileUrl            String
+  updatedAt          DateTime      @default(now())
+
+  @@map("project_thesis_update_logs")
+}

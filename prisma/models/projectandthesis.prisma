@@ -1,0 +1,53 @@
+model ProjectThesis {
+  id                String              @id @default(uuid())
+  projectTitle      String
+  abstract          String
+  projectObjectives String
+  methodology       String
+  expectedOutcomes  String
+  technologiesTools String[]
+  estimatedTimeline String
+  attachments       String[]
+  feedback          String?
+  type              ProjectThesisType
+  status            ProjectThesisStatus @default(PENDING)
+  courseId          String
+  course            Courses             @relation(fields: [courseId], references: [id])
+  studentId         String
+  student           Student             @relation(fields: [studentId], references: [id])
+  supervisorId      String
+  supervisor        Teacher             @relation(fields: [supervisorId], references: [id])
+  semester          SemesterType        @default(FIRST)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  tasks                   Task[]
+  projectThesisUpdateLogs ProjectThesisUpdateLog[]
+
+  @@map("projectThesis")
+}
+
+enum ProjectThesisType {
+  PROJECT
+  THESIS
+}
+
+enum ProjectThesisStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  in_PROGRESS
+  COMPLETED
+}
+
+enum SemesterType {
+  FIRST   @map("1st")
+  SECOND  @map("2nd")
+  THIRD   @map("3rd")
+  FOURTH  @map("4th")
+  FIFTH   @map("5th")
+  SIXTH   @map("6th")
+  SEVENTH @map("7th")
+  EIGHTH  @map("8th")
+}
