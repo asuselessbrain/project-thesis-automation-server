@@ -15,7 +15,6 @@
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.27.0",
-  "type": "module",
   "prisma": {
     "schema": "./prisma"
   },
@@ -29,6 +28,7 @@
     "@types/nodemailer": "^7.0.5",
     "@types/pg": "^8.16.0",
     "prisma": "^7.3.0",
+    "tsup": "^8.5.1",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   },
